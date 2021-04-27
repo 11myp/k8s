@@ -5,3 +5,23 @@ metadata:
   labels:
     app:nginx
 spec:
+    replicas:3  #
+    selector:
+      matchLabels:
+        app:nginx
+    template:
+      metadata:
+        labels:
+          app:nginx
+      spec:
+        containers:
+        - name:nginx
+          images:nginx:1.13.12
+          ports:
+          - containerPort: 80
+          volumeMounts:
+          - mountPath: /cache
+            name: cache-volume
+        volumes:
+          - name: cache-volume
+            emptyDir: { }             
